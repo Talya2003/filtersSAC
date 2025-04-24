@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/filtersSAC/static/css/main.f855e6bc.css",
+    "main.js": "/filtersSAC/static/js/main.b8297bf5.js",
+    "index.html": "/filtersSAC/index.html",
+    "main.f855e6bc.css.map": "/filtersSAC/static/css/main.f855e6bc.css.map",
+    "main.b8297bf5.js.map": "/filtersSAC/static/js/main.b8297bf5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.b8297bf5.js"
+  ]
+}
