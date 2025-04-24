@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './MyDashboard.css';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import axios from 'axios';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -12,7 +11,6 @@ const chartTypes = [
 ];
 
 const enumFilters = ['Sales', 'Marketing', 'Finance'];
-
 
 
 function MyDashboard() {
