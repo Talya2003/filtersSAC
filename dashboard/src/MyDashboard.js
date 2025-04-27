@@ -9,10 +9,10 @@ const chartTypes = [
 
 const enumFilters = ['country', 'sum'];
 
-function MyDashboard() {
+function MyDashboard({ goHome }) {
     const [droppedCharts, setDroppedCharts] = useState([]);
     const [filterValue, setFilterValue] = useState(enumFilters[0]);
-    const iframeRefs = useRef({}); 
+    const iframeRefs = useRef({});
 
     const handleDrop = (result) => {
         if (!result.destination) return;
@@ -23,13 +23,13 @@ function MyDashboard() {
     };
 
     const applyFilter = () => {
-        Object.keys(iframeRefs.current).forEach(key => {
-            const iframe = iframeRefs.current[key];
+        droppedCharts.forEach(({ id, type }) => {
+            const iframe = iframeRefs.current[id];
             if (iframe && iframe.contentWindow) {
                 const filterPayload = {
                     type: 'setFilter',
                     data: {
-                        dataSource: key, 
+                        dataSource: type, 
                         selections: [
                             {
                                 dimension: 'sum', 
@@ -58,6 +58,9 @@ function MyDashboard() {
                         <option key={opt} value={opt}>{opt}</option>
                     ))}
                 </select>
+                <button onClick={goHome} className="back-button">
+                    חזרה לעמוד הבית
+                </button>
             </header>
 
             <DragDropContext onDragEnd={handleDrop}>
@@ -99,7 +102,7 @@ function MyDashboard() {
                                         <div key={id} className="chart-box">
                                             <h4>{type} - {filterValue}</h4>
                                             <iframe
-                                                ref={(el) => iframeRefs.current[type] = el}
+                                                ref={(el) => iframeRefs.current[id] = el}
                                                 src={`https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/${type}/?mode=embed`}
                                                 title={type}
                                                 width="100%"
