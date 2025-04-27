@@ -1,12 +1,10 @@
-// MyDashboard.js
-
 import React, { useState, useRef } from 'react';
 import './MyDashboard.css';
 
 const iframeUrls = [
-  'https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/BDAE63DB7638245C442E8573ECE1FC62/?mode=embed',
-  'https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/F3696576161D527ECEC5C32A4DF859B0/?mode=embed',
-  'https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/A557D9EB3FC671CA6AD5039E942D1022/?mode=embed',
+  'https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/BDAE63DB7638245C442E8573ECE1FC62/?mode=present',
+  'https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/F3696576161D527ECEC5C32A4DF859B0/?mode=present',
+  'https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/A557D9EB3FC671CA6AD5039E942D1022/?mode=present',
 ];
 
 function MyDashboard() {

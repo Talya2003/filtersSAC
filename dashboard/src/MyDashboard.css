@@ -1,5 +1,3 @@
-/* MyDashboard.css */
-
 .dashboard-wrapper {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -14,9 +12,9 @@
   
   .dashboard-content {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
-  }
+  }  
   
   .iframe-container {
     border: 1px solid #ddd;
