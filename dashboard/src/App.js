@@ -70,7 +70,18 @@ function App() {
     <div>
       <iframe 
         ref={iframeRef}
-        src="https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/A557D9EB3FC671CA6AD5039E942D1022/?mode=present&filter=SUM&value=13"
+        src="https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/A557D9EB3FC671CA6AD5039E942D1022/?mode=present"
+        width="50%"
+        height="350px"
+        title="SAC Dashboard"
+        frameBorder="0"
+      />
+
+      <br/>
+      
+      <iframe 
+        ref={iframeRef}
+        src="https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/F3696576161D527ECEC5C32A4DF859B0/?type=RESPONSIVE&mode=present"
         width="50%"
         height="350px"
         title="SAC Dashboard"
