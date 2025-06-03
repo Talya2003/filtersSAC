@@ -75,7 +75,7 @@ import React, { useState, useRef, useEffect } from 'react';
 const enumFilters = ['Sales', 'Marketing', 'Finance'];
 
 function MyDashboard() {
-  const [availableCharts, setAvailableCharts] = useState([]); // תרשימים שנשלפו מהשרת
+  const [availableCharts, setAvailableCharts] = useState([]); 
   const [droppedCharts, setDroppedCharts] = useState([]);
   const [filterValue, setFilterValue] = useState(enumFilters[0]);
   const [draggedItem, setDraggedItem] = useState(null);
@@ -85,7 +85,7 @@ function MyDashboard() {
   const [error, setError] = useState(null);
   const iframeRefs = useRef([]);
 
-  // פונקציה לשליפת התרשימים מהשרת
+
   const fetchChartsFromSAC = async () => {
     try {
       setIsLoading(true);
@@ -196,7 +196,7 @@ function MyDashboard() {
     if (chart && droppedCharts.length < 3) {
       const newChart = {
         ...chart,
-        id: Date.now(), // ID יניק לכל instance
+        id: Date.now(),
         originalId: chart.id,
         currentFilter: filterValue,
         generatedUrl: generateChartUrlWithFilter(chart.url, filterValue, chart.id)
@@ -223,7 +223,6 @@ function MyDashboard() {
   };
 
   const applyFilter = () => {
-    // עדכון ה-URLs של כל התרשימים עם הפילטר החדש
     setDroppedCharts(prev => prev.map(chart => ({
       ...chart,
       currentFilter: filterValue,
@@ -234,7 +233,6 @@ function MyDashboard() {
       )
     })));
 
-    // שליחת הפילטר לכל ה-iframes גם כן
     iframeRefs.current.forEach((iframe) => {
       if (iframe && iframe.contentWindow) {
         const filterPayload = {
@@ -283,7 +281,7 @@ function MyDashboard() {
         fontSize: '18px',
         color: '#3dbdff'
       }}>
-        🔄 טוען תרשימים מהשרת...
+        טוען תרשימים מהשרת...
       </div>
     );
   }
