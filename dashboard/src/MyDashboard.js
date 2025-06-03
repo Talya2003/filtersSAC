@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 const enumFilters = ['Israel', 'בעל תז'];
 
 function MyDashboard() {
-  const [availableCharts, setAvailableCharts] = useState([]); 
+  const [availableCharts, setAvailableCharts] = useState([]);
   const [droppedCharts, setDroppedCharts] = useState([]);
   const [filterValue, setFilterValue] = useState(enumFilters[0]);
   const [draggedItem, setDraggedItem] = useState(null);
@@ -54,24 +54,67 @@ function MyDashboard() {
     }
   };
 
-  // טעינת התרשימים בעת טעינת הקומפוננטה
   useEffect(() => {
     fetchChartsFromSAC();
   }, []);
 
-  // פונקציה ליצירת URL עם פילטר
+
   const generateChartUrlWithFilter = (baseUrl, filter, chartId) => {
-    // **כאן תוכלי להתאים את הלוגיקה לפי הצורך שלך**
-    // לדוגמה, הוספת פרמטרים לURL או שינוי במבנה ה-URL
+    try {
+      const storyId = baseUrl.split('/').pop().replace('/?mode=present', '');
 
-    const urlParams = new URLSearchParams();
-    urlParams.append('filter', filter);
-    urlParams.append('chartId', chartId);
+      const storyModels = {
+        'A557D9EB3FC671CA6AD5039E942D1022': {
+          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          dimension: 'מדינות מוצא'
+        },
+        '3AAF0C9B3B9DE528D232DAD04A946FE2': {
+          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          dimension: 'מדינות מוצא'
+        },
+        '91E7432F4794A623FF7FD8C31B8DF96E': {
+          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          dimension: 'סוגי נוסעים'
+        }
+      };
 
-    // אם יש פרמטרים קיימים ב-URL
-    const separator = baseUrl.includes('?') ? '&' : '?';
-    return `${baseUrl}${separator}${urlParams.toString()}`;
+      const storyConfig = storyModels[storyId];
+
+      if (!storyConfig) {
+        console.warn(`לא נמצא מודל עבור Story ID: ${storyId}`);
+        return baseUrl; 
+      }
+
+      let filterValue;
+      if (filter === 'Israel') {
+        filterValue = '["ישראל"]'; 
+      } else if (filter === 'בעל תז') {
+        filterValue = '["בעל תז"]'; 
+      } else {
+        filterValue = `["${filter}"]`; 
+      }
+
+      const baseUrlWithoutParams = `https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/${storyId}`;
+
+      const filterParams = new URLSearchParams({
+        f01Model: storyConfig.model,
+        f01Dim: storyConfig.dimension,
+        f01Val: filterValue,
+        mode: 'present'
+      });
+
+      const newUrl = `${baseUrlWithoutParams}?${filterParams.toString()}`;
+
+      console.log(`נוצר URL מפולטר עבור ${storyConfig.description}:`, newUrl);
+
+      return newUrl;
+
+    } catch (error) {
+      console.error('שגיאה ביצירת URL מפולטר:', error);
+      return baseUrl; 
+    }
   };
+
 
   const handleDragStart = (e, chart) => {
     setDraggedItem(chart);
