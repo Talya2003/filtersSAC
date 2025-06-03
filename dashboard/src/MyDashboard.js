@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const enumFilters = ['Sales', 'Marketing', 'Finance'];
+const enumFilters = ['Israel', 'בעל תז'];
 
 function MyDashboard() {
   const [availableCharts, setAvailableCharts] = useState([]); 
