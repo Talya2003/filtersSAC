@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const enumFilters = ['Israel', 'בעל תז'];
+const enumFilters = ['אשדוד', 'בן גוריון', 'גשר אלנבי', 'טאבה', 'לא רשום', 'רפיח']; // defualt filters of default dimension TEUR_SITE
 
 function MyDashboard() {
   const [availableCharts, setAvailableCharts] = useState([]);
@@ -59,49 +59,46 @@ function MyDashboard() {
   }, []);
 
 
-  const generateChartUrlWithFilter = (baseUrl, filter, chartId) => {
+  const generateChartUrlWithFilter = (baseUrl, filter, chartId, dimension, measure) => {
     try {
       const storyId = baseUrl.split('/').pop().replace('/?mode=present', '');
 
       const storyModels = {
         'A557D9EB3FC671CA6AD5039E942D1022': {
-          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][ModelFctRashbag]',
-          dimension: 'מדינות מוצא'
+          model: 'view:[PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          dimension: 'TEUR_SITE'
         },
         '3AAF0C9B3B9DE528D232DAD04A946FE2': {
-          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][ModelFctRashbag]',
-          dimension: 'מדינות מוצא'
+          model: 'view:[PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          dimension: 'TEUR_SITE'
         },
         '91E7432F4794A623FF7FD8C31B8DF96E': {
-          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][ModelFctRashbag]',
-          dimension: 'סוגי נוסעים'
+          model: 'view:[PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          dimension: 'TEUR_SITE'
         }
       };
 
       const storyConfig = storyModels[storyId];
 
       if (!storyConfig) {
-        console.warn(`לא נמצא מודל עבור Story ID: ${storyId}`);
-        return baseUrl; 
+        console.warn(`לא נמצא מודל עבור : ${storyId}`);
+        return baseUrl;
       }
 
-      let filterValue;
-      if (filter === 'Israel') {
-        filterValue = '["ישראל"]'; 
-      } else if (filter === 'בעל תז') {
-        filterValue = '["בעל תז"]'; 
-      } else {
-        filterValue = `["${filter}"]`; 
-      }
+      const filterDimension = dimension || storyConfig.dimension; // default dimension
+
+      const filterValue = `["${measure || filter}"]`;
 
       const baseUrlWithoutParams = `https://piba-qa.il30.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/${storyId}`;
 
       const filterParams = new URLSearchParams({
         f01Model: storyConfig.model,
-        f01Dim: storyConfig.dimension,
-        f01Val: filterValue,
+        f01Dim: filterDimension, 
+        f01Val: filterValue, 
         mode: 'present'
       });
+
+      console.log(`יצירת URL מפולטר עבור ${filterParams.toString()}`);
 
       const newUrl = `${baseUrlWithoutParams}?${filterParams.toString()}`;
 
@@ -111,7 +108,7 @@ function MyDashboard() {
 
     } catch (error) {
       console.error('שגיאה ביצירת URL מפולטר:', error);
-      return baseUrl; 
+      return baseUrl;
     }
   };
 
