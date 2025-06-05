@@ -61,7 +61,7 @@ function MyDashboard() {
 
   const generateChartUrlWithFilter = (baseUrl, filter, chartId, dimension, measure) => {
     try {
-      const storyId = baseUrl.split('/').pop().replace('/?mode=present', '');
+      const storyId = baseUrl.split('/').pop().replace('?mode=present', '');
 
       const storyModels = {
         'A557D9EB3FC671CA6AD5039E942D1022': {
