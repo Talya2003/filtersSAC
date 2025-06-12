@@ -59,7 +59,7 @@ function MyDashboard() {
   }, []);
 
 
-  const generateChartUrlWithFilter = (baseUrl, filter, chartId, dimension, measure) => {
+  const generateChartUrlWithFilter = (baseUrl, filter, dimension, measure) => {
     try {
       const storyId = baseUrl.split('/').pop().replace('?mode=present', '');
 
@@ -79,6 +79,7 @@ function MyDashboard() {
       };
 
       const storyConfig = storyModels[storyId];
+      console.log( `מודל עבור ${storyId}:`, storyConfig);
 
       if (!storyConfig) {
         console.warn(`לא נמצא מודל עבור : ${storyId}`);
