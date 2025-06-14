@@ -65,15 +65,15 @@ function MyDashboard() {
 
       const storyModels = {
         'A557D9EB3FC671CA6AD5039E942D1022': {
-          model: 'view:[PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][CV_MODEL_FCT_RASHBAG]',
           dimension: 'TEUR_SITE'
         },
         '3AAF0C9B3B9DE528D232DAD04A946FE2': {
-          model: 'view:[PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][CV_MODEL_FCT_RASHBAG]',
           dimension: 'TEUR_SITE'
         },
         '91E7432F4794A623FF7FD8C31B8DF96E': {
-          model: 'view:[PIBADWH_HDI_DB_1][ModelFctRashbag]',
+          model: 'view:[PIBADWH_HDI_DB_1][PIBADWH_HDI_DB_1][CV_MODEL_FCT_RASHBAG]',
           dimension: 'TEUR_SITE'
         }
       };
